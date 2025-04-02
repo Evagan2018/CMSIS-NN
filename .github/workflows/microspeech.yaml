@@ -55,7 +55,7 @@ jobs:
 
   build_and_run:
     name: Build and run projects on AVH
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: set_pending_status_to_pr
     permissions:
       id-token: write
@@ -65,7 +65,7 @@ jobs:
       pull-requests: write
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.2.2
         with:
           repository: ARM-software/AVH-TFLmicrospeech
           ref: main
@@ -177,7 +177,7 @@ jobs:
            eventlist-linux64/eventlist -s ./Platform_FVP_Corstone_SSE-300_Ethos-U55/microspeech.Helium.EventRecorder.log
 
   set_success_status_to_pr:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: build_and_run
     if: github.event.workflow_run && success()
     steps:
@@ -197,7 +197,7 @@ jobs:
             --fail
 
   set_failure_status_to_pr:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: build_and_run
     if: github.event.workflow_run && failure()
     steps:
